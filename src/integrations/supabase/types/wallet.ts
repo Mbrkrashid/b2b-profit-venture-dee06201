@@ -2,19 +2,19 @@ import { Database } from './common';
 
 export interface Transaction {
   id: string;
-  wallet_id: string | null;
+  wallet_id?: string;
   type: Database["public"]["Enums"]["transaction_type"];
   amount: number;
-  ecoin_amount: number | null;
-  status: string | null;
+  ecoin_amount?: number;
+  status?: string;
   created_at: string;
 }
 
 export interface Wallet {
   id: string;
-  user_id: string | null;
-  balance: number | null;
-  ecoin_balance: number | null;
+  user_id?: string;
+  balance?: number;
+  ecoin_balance?: number;
   created_at: string;
   updated_at: string;
 }

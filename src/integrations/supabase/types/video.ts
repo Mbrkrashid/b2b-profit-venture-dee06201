@@ -4,26 +4,27 @@ export interface Video {
   id: string;
   creator_id: string;
   title: string;
-  description: string | null;
+  description?: string;
   url: string;
-  thumbnail_url: string | null;
-  views: number | null;
-  status: DatabaseEnums['content_status'] | null;
+  thumbnail_url?: string;
+  views?: number;
+  status?: DatabaseEnums['content_status'];
   created_at: string;
-  premium_price: number | null;
-  is_premium: boolean | null;
+  premium_price?: number;
+  is_premium?: boolean;
 }
 
 export interface VideoDownload {
   id: string;
-  video_id: string | null;
-  user_id: string | null;
-  downloaded_at: string | null;
+  video_id?: string;
+  user_id?: string;
+  downloaded_at?: string;
 }
 
-export interface View {
+export interface PremiumVideoAccess {
   id: string;
+  user_id: string;
   video_id: string;
-  viewer_id: string;
-  created_at: string;
+  amount_paid: number;
+  purchased_at?: string;
 }

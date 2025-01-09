@@ -2,8 +2,8 @@ export interface Achievement {
   id: string;
   name: string;
   description: string;
-  icon_url: string | null;
-  points: number | null;
+  icon_url?: string;
+  points?: number;
 }
 
 export interface UserAchievement {

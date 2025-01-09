@@ -7,3 +7,5 @@ export * from './payment';
 export * from './achievement';
 export * from './task';
 export * from './referral';
+export * from './social';
+export * from './ad';
