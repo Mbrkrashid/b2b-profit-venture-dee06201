@@ -1,4 +1,4 @@
-export type Referral = {
+export interface Referral {
   id: string;
   referrer_id: string | null;
   referred_id: string | null;

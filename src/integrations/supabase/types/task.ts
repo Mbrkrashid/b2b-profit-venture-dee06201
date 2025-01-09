@@ -1,15 +1,15 @@
-import { Database } from './common';
+import { DatabaseEnums } from './common';
 
-export type Task = {
+export interface Task {
   id: string;
   title: string;
   description: string | null;
-  type: Database['public']['Enums']['task_type'];
+  type: DatabaseEnums['task_type'];
   points: number | null;
   created_at: string;
 }
 
-export type UserTask = {
+export interface UserTask {
   id: string;
   user_id: string | null;
   task_id: string | null;

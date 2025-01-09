@@ -1,4 +1,4 @@
-export type Achievement = {
+export interface Achievement {
   id: string;
   name: string;
   description: string;
@@ -6,7 +6,7 @@ export type Achievement = {
   points: number | null;
 }
 
-export type UserAchievement = {
+export interface UserAchievement {
   id: string;
   user_id: string;
   achievement_id: string;

@@ -1,9 +1,9 @@
-import { Database } from './common';
+import { DatabaseEnums } from './common';
 
-export type Investment = {
+export interface Investment {
   id: string;
   wallet_id: string | null;
-  category: Database['public']['Enums']['investment_category'];
+  category: DatabaseEnums['investment_category'];
   amount: number;
   ecoin_amount: number;
   redemption_date: string;
