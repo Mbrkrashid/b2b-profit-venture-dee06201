@@ -72,6 +72,47 @@ export type Database = {
           },
         ]
       }
+      investments: {
+        Row: {
+          amount: number
+          category: Database["public"]["Enums"]["investment_category"]
+          created_at: string
+          ecoin_amount: number
+          id: string
+          redemption_date: string
+          status: string | null
+          wallet_id: string | null
+        }
+        Insert: {
+          amount: number
+          category: Database["public"]["Enums"]["investment_category"]
+          created_at?: string
+          ecoin_amount: number
+          id?: string
+          redemption_date: string
+          status?: string | null
+          wallet_id?: string | null
+        }
+        Update: {
+          amount?: number
+          category?: Database["public"]["Enums"]["investment_category"]
+          created_at?: string
+          ecoin_amount?: number
+          id?: string
+          redemption_date?: string
+          status?: string | null
+          wallet_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "investments_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -143,6 +184,44 @@ export type Database = {
           type?: Database["public"]["Enums"]["task_type"]
         }
         Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          ecoin_amount: number | null
+          id: string
+          status: string | null
+          type: Database["public"]["Enums"]["transaction_type"]
+          wallet_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          ecoin_amount?: number | null
+          id?: string
+          status?: string | null
+          type: Database["public"]["Enums"]["transaction_type"]
+          wallet_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          ecoin_amount?: number | null
+          id?: string
+          status?: string | null
+          type?: Database["public"]["Enums"]["transaction_type"]
+          wallet_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_achievements: {
         Row: {
@@ -328,6 +407,41 @@ export type Database = {
           },
         ]
       }
+      wallets: {
+        Row: {
+          balance: number | null
+          created_at: string
+          ecoin_balance: number | null
+          id: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          balance?: number | null
+          created_at?: string
+          ecoin_balance?: number | null
+          id?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          balance?: number | null
+          created_at?: string
+          ecoin_balance?: number | null
+          id?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wallets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -337,7 +451,13 @@ export type Database = {
     }
     Enums: {
       content_status: "pending" | "approved" | "rejected"
+      investment_category:
+        | "logistics"
+        | "oil_and_gas"
+        | "ecommerce"
+        | "import_export"
       task_type: "social_share" | "watch_video" | "daily_login" | "vote"
+      transaction_type: "deposit" | "withdrawal" | "investment" | "redemption"
       user_role: "admin" | "judge" | "participant" | "viewer"
     }
     CompositeTypes: {
