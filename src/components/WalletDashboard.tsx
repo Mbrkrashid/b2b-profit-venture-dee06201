@@ -4,6 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Transaction, Wallet } from "@/integrations/supabase/types";
 import { WalletBalance } from "./wallet/WalletBalance";
 import { TransactionList } from "./wallet/TransactionList";
+import { TopUpButton } from "./wallet/TopUpButton";
+import { InvestmentReturns } from "./wallet/InvestmentReturns";
 
 export const WalletDashboard = () => {
   const [wallet, setWallet] = useState<Wallet | null>(null);
@@ -57,8 +59,15 @@ export const WalletDashboard = () => {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold">Wallet Dashboard</h2>
+        <TopUpButton />
+      </div>
+      
       <WalletBalance wallet={wallet} />
+      
+      <InvestmentReturns />
       
       <Card>
         <CardHeader>

@@ -556,7 +556,7 @@ export type Database = {
           status?: Database["public"]["Enums"]["content_status"] | null
           thumbnail_url?: string | null
           title?: string
-          url: string
+          url?: string
           views?: number | null
         }
         Relationships: [
@@ -703,7 +703,7 @@ export type Tables<
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never,
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
@@ -757,10 +757,10 @@ export type TablesUpdate<
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
-    }
-    ? U
-    : never
+        Update: infer U
+      }
+      ? U
+      : never
     : never
 
 export type Enums<
@@ -790,22 +790,3 @@ export type CompositeTypes<
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
-
-export type Transaction = {
-  id: string;
-  wallet_id: string | null;
-  type: "deposit" | "withdrawal" | "investment" | "redemption";
-  amount: number;
-  ecoin_amount: number | null;
-  status: string | null;
-  created_at: string;
-};
-
-export type Wallet = {
-  id: string;
-  user_id: string | null;
-  balance: number | null;
-  ecoin_balance: number | null;
-  created_at: string;
-  updated_at: string;
-};
