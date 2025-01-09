@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { WalletDashboard } from "@/components/WalletDashboard";
 import { InvestmentOptions } from "@/components/InvestmentOptions";
-import { ReferralProgram } from "@/components/ReferralProgram";
+import { ReferralCard } from "@/components/referral/ReferralCard";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 
@@ -46,8 +46,8 @@ const Dashboard = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid gap-8">
           <WalletDashboard />
+          <ReferralCard />
           <InvestmentOptions />
-          <ReferralProgram />
         </div>
       </main>
     </div>
