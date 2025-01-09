@@ -59,10 +59,6 @@ export const WalletDashboard = () => {
     return <div>Loading wallet...</div>;
   }
 
-  if (!wallet) {
-    return <div>No wallet found. Please contact support.</div>;
-  }
-
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -128,8 +124,11 @@ export const WalletDashboard = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center text-muted-foreground py-8">
-              No transactions yet
+            <div className="text-center py-8">
+              <p className="text-muted-foreground">No transactions yet</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Start your investment journey by making your first deposit
+              </p>
             </div>
           )}
         </CardContent>
