@@ -1,7 +1,7 @@
 import { ArrowRight, TrendingUp, Shield, Coins, ChartBar, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { SocialShare } from "./SocialShare";
+import { SocialShare } from "./social/SocialShare";
 
 export const Hero = () => {
   const navigate = useNavigate();
