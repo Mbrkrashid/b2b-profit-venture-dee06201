@@ -3,24 +3,38 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Wallet, CircleDollarSign, ArrowUpRight, ArrowDownLeft } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 export const WalletDashboard = () => {
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getUserId = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUserId(user?.id || null);
+    };
+    getUserId();
+  }, []);
+
   const { data: wallet, isLoading: isLoadingWallet } = useQuery({
-    queryKey: ["wallet"],
+    queryKey: ["wallet", userId],
     queryFn: async () => {
+      if (!userId) return null;
+      
       const { data, error } = await supabase
         .from("wallets")
         .select("*")
-        .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
+        .eq('user_id', userId)
         .maybeSingle();
       
       if (error) throw error;
       return data;
     },
+    enabled: !!userId,
   });
 
   const { data: transactions, isLoading: isLoadingTransactions } = useQuery({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", wallet?.id],
     queryFn: async () => {
       if (!wallet?.id) return [];
       
@@ -36,6 +50,10 @@ export const WalletDashboard = () => {
     },
     enabled: !!wallet?.id,
   });
+
+  if (!userId) {
+    return <div>Please log in to view your wallet.</div>;
+  }
 
   if (isLoadingWallet) {
     return <div>Loading wallet...</div>;
