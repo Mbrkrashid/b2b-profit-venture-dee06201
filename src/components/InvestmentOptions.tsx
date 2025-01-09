@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
+import { PaymentButton } from "./PaymentButton";
 
 export const InvestmentOptions = () => {
   const { toast } = useToast();
@@ -51,7 +51,7 @@ export const InvestmentOptions = () => {
     },
   ];
 
-  const handleInvestment = async (option: typeof options[0]) => {
+  const handleInvestmentSuccess = async (option: typeof options[0]) => {
     try {
       setIsInvesting(true);
       
@@ -64,16 +64,7 @@ export const InvestmentOptions = () => {
         return;
       }
 
-      if (wallet.balance < option.minimum) {
-        toast({
-          title: "Insufficient Balance",
-          description: `You need at least ₦${option.minimum.toLocaleString()} to invest in this fund`,
-          variant: "destructive",
-        });
-        return;
-      }
-
-      // Create investment record with properly formatted date
+      // Create investment record
       const redemptionDate = new Date(Date.now() + getMonthsInMs(parseInt(option.duration)));
       const { error: investmentError } = await supabase
         .from("investments")
@@ -81,23 +72,11 @@ export const InvestmentOptions = () => {
           wallet_id: wallet.id,
           category: option.category,
           amount: option.minimum,
-          ecoin_amount: Math.floor((option.minimum / 5000) * 10), // Same conversion rate as deposits
+          ecoin_amount: Math.floor((option.minimum / 5000) * 10),
           redemption_date: redemptionDate.toISOString(),
         });
 
       if (investmentError) throw investmentError;
-
-      // Create transaction record
-      const { error: transactionError } = await supabase
-        .from("transactions")
-        .insert({
-          wallet_id: wallet.id,
-          type: "investment",
-          amount: option.minimum,
-          ecoin_amount: Math.floor((option.minimum / 5000) * 10),
-        });
-
-      if (transactionError) throw transactionError;
 
       toast({
         title: "Investment Successful",
@@ -143,14 +122,15 @@ export const InvestmentOptions = () => {
                   <p className="text-sm text-gray-500">Lock-in Period</p>
                   <p className="text-lg">{option.duration}</p>
                 </div>
-                <Button 
-                  className="w-full bg-primary/90 hover:bg-primary"
-                  onClick={() => handleInvestment(option)}
-                  disabled={isInvesting}
-                >
-                  {isInvesting ? "Processing..." : "Invest Now"}
-                  <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Button>
+                <PaymentButton 
+                  amount={option.minimum}
+                  onSuccess={() => handleInvestmentSuccess(option)}
+                  className="w-full bg-primary/90 hover:bg-primary flex items-center justify-center"
+                />
+                <div className="flex items-center justify-center text-sm text-gray-500">
+                  <ArrowUpRight className="mr-1 h-4 w-4" />
+                  Secured by OPay
+                </div>
               </div>
             </CardContent>
           </Card>
