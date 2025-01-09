@@ -1,5 +1,5 @@
-export * from './common';
-export * from './wallet';
+export type { Database } from './common';
+export type { Transaction, Wallet } from './wallet';
 export * from './user';
 export * from './video';
 export * from './achievement';
