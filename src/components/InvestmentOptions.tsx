@@ -73,7 +73,8 @@ export const InvestmentOptions = () => {
         return;
       }
 
-      // Create investment record
+      // Create investment record with properly formatted date
+      const redemptionDate = new Date(Date.now() + getMonthsInMs(parseInt(option.duration)));
       const { error: investmentError } = await supabase
         .from("investments")
         .insert({
@@ -81,7 +82,7 @@ export const InvestmentOptions = () => {
           category: option.category,
           amount: option.minimum,
           ecoin_amount: Math.floor((option.minimum / 5000) * 10), // Same conversion rate as deposits
-          redemption_date: new Date(Date.now() + getMonthsInMs(parseInt(option.duration))),
+          redemption_date: redemptionDate.toISOString(),
         });
 
       if (investmentError) throw investmentError;
