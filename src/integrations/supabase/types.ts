@@ -33,6 +33,39 @@ export type Database = {
         }
         Relationships: []
       }
+      ads: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          link_url: string | null
+          status: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          link_url?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          link_url?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       comments: {
         Row: {
           content: string
@@ -109,6 +142,86 @@ export type Database = {
             columns: ["wallet_id"]
             isOneToOne: false
             referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      opay_transactions: {
+        Row: {
+          amount: number
+          created_at: string | null
+          id: string
+          metadata: Json | null
+          reference: string
+          status: Database["public"]["Enums"]["payment_status"] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          reference: string
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          reference?: string
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "opay_transactions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      premium_video_access: {
+        Row: {
+          amount_paid: number
+          id: string
+          purchased_at: string | null
+          user_id: string
+          video_id: string
+        }
+        Insert: {
+          amount_paid: number
+          id?: string
+          purchased_at?: string | null
+          user_id: string
+          video_id: string
+        }
+        Update: {
+          amount_paid?: number
+          id?: string
+          purchased_at?: string | null
+          user_id?: string
+          video_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "premium_video_access_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "premium_video_access_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "videos"
             referencedColumns: ["id"]
           },
         ]
@@ -199,6 +312,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      social_media_channels: {
+        Row: {
+          created_at: string
+          handle: string
+          icon: string | null
+          id: string
+          platform: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          handle: string
+          icon?: string | null
+          id?: string
+          platform: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          handle?: string
+          icon?: string | null
+          id?: string
+          platform?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
       }
       tasks: {
         Row: {
@@ -340,12 +483,50 @@ export type Database = {
           },
         ]
       }
+      video_downloads: {
+        Row: {
+          downloaded_at: string | null
+          id: string
+          user_id: string | null
+          video_id: string | null
+        }
+        Insert: {
+          downloaded_at?: string | null
+          id?: string
+          user_id?: string | null
+          video_id?: string | null
+        }
+        Update: {
+          downloaded_at?: string | null
+          id?: string
+          user_id?: string | null
+          video_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_downloads_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_downloads_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "videos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       videos: {
         Row: {
           created_at: string
           creator_id: string
           description: string | null
           id: string
+          is_premium: boolean | null
+          premium_price: number | null
           status: Database["public"]["Enums"]["content_status"] | null
           thumbnail_url: string | null
           title: string
@@ -357,6 +538,8 @@ export type Database = {
           creator_id: string
           description?: string | null
           id?: string
+          is_premium?: boolean | null
+          premium_price?: number | null
           status?: Database["public"]["Enums"]["content_status"] | null
           thumbnail_url?: string | null
           title: string
@@ -368,6 +551,8 @@ export type Database = {
           creator_id?: string
           description?: string | null
           id?: string
+          is_premium?: boolean | null
+          premium_price?: number | null
           status?: Database["public"]["Enums"]["content_status"] | null
           thumbnail_url?: string | null
           title?: string
@@ -498,9 +683,10 @@ export type Database = {
         | "oil_and_gas"
         | "ecommerce"
         | "import_export"
+      payment_status: "pending" | "success" | "failed"
       task_type: "social_share" | "watch_video" | "daily_login" | "vote"
       transaction_type: "deposit" | "withdrawal" | "investment" | "redemption"
-      user_role: "admin" | "judge" | "participant" | "viewer"
+      user_role: "admin" | "judge" | "participant" | "viewer" | "owner"
     }
     CompositeTypes: {
       [_ in never]: never
