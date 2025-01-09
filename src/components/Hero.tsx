@@ -32,12 +32,12 @@ export const Hero = () => {
         <div className="animate-fade-in">
           <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
-              Invest Smart, Grow Wealth
+              Invest Smart Northern Nigeria
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-12 animate-fade-in delay-200">
-            Join thousands of investors earning competitive returns through our innovative investment platform
+            Join thousands of Northern Nigerian investors earning competitive returns through our innovative investment platform
           </p>
         </div>
 
@@ -47,8 +47,8 @@ export const Hero = () => {
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary/20 rounded-full animate-pulse" />
               <TrendingUp className="h-12 w-12 text-white mx-auto mb-4 relative z-10" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Quick Returns</h3>
-            <p className="text-gray-200">Start with ₦1,000 for 4 weeks</p>
+            <h3 className="text-xl font-bold text-white mb-2">Northern Growth</h3>
+            <p className="text-gray-200">Invest in Northern prosperity</p>
           </div>
           
           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 transform hover:scale-105 transition-all duration-300 animate-fade-in delay-400">
@@ -65,8 +65,8 @@ export const Hero = () => {
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/20 rounded-full animate-pulse" />
               <Coins className="h-12 w-12 text-white mx-auto mb-4 relative z-10" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">ECoin Rewards</h3>
-            <p className="text-gray-200">Earn tokens on investments</p>
+            <h3 className="text-xl font-bold text-white mb-2">Regional Growth</h3>
+            <p className="text-gray-200">Empowering Northern businesses</p>
           </div>
         </div>
 
@@ -80,7 +80,7 @@ export const Hero = () => {
           </Button>
           
           <p className="text-gray-300 mt-4 animate-pulse">
-            Secure your future with smart investments
+            Building wealth in Northern Nigeria
           </p>
         </div>
 
