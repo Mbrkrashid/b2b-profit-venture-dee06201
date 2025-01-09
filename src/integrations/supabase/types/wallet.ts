@@ -3,7 +3,7 @@ import { Database } from './common';
 export interface Transaction {
   id: string;
   wallet_id: string | null;
-  type: 'deposit' | 'withdrawal' | 'investment' | 'reward';
+  type: Database["public"]["Enums"]["transaction_type"];
   amount: number;
   ecoin_amount: number | null;
   status: string | null;
