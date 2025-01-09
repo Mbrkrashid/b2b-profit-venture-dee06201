@@ -6,6 +6,7 @@ import { WalletBalance } from "./wallet/WalletBalance";
 import { TransactionList } from "./wallet/TransactionList";
 import { TopUpButton } from "./wallet/TopUpButton";
 import { InvestmentReturns } from "./wallet/InvestmentReturns";
+import { ReferralCard } from "./referral/ReferralCard";
 
 export const WalletDashboard = () => {
   const [wallet, setWallet] = useState<Wallet | null>(null);
@@ -65,7 +66,10 @@ export const WalletDashboard = () => {
         <TopUpButton />
       </div>
       
-      <WalletBalance wallet={wallet} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <WalletBalance wallet={wallet} />
+        <ReferralCard />
+      </div>
       
       <InvestmentReturns />
       

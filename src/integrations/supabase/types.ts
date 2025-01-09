@@ -674,7 +674,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      add_ecoin_reward: {
+        Args: {
+          user_id: string
+          amount: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       content_status: "pending" | "approved" | "rejected"
@@ -790,3 +796,8 @@ export type CompositeTypes<
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
+
+// Add these type definitions at the end of the file
+export type Transaction = Tables<'transactions'>;
+export type Wallet = Tables<'wallets'>;
+export type Referral = Tables<'referrals'>;
