@@ -32,12 +32,12 @@ export const Hero = () => {
         <div className="animate-fade-in">
           <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
-              Invest Smart Northern Nigeria
+              B2B Profit Investment
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-12 animate-fade-in delay-200">
-            Join thousands of Northern Nigerian investors earning competitive returns through our innovative investment platform
+            Join thousands of Northern Nigerian investors earning competitive returns through B2B Profit Investment platform
           </p>
         </div>
 
