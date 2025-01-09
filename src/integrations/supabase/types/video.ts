@@ -1,5 +1,3 @@
-import { DatabaseEnums } from './common';
-
 export interface Video {
   id: string;
   creator_id: string;
@@ -8,7 +6,7 @@ export interface Video {
   url: string;
   thumbnail_url?: string;
   views?: number;
-  status?: DatabaseEnums['content_status'];
+  status?: string;
   created_at: string;
   premium_price?: number;
   is_premium?: boolean;
@@ -27,4 +25,11 @@ export interface PremiumVideoAccess {
   video_id: string;
   amount_paid: number;
   purchased_at?: string;
+}
+
+export interface View {
+  id: string;
+  video_id: string;
+  viewer_id: string;
+  created_at: string;
 }

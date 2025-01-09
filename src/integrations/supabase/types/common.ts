@@ -1,15 +1,13 @@
-import { Achievement } from './achievement';
+import { Achievement, UserAchievement } from './achievement';
 import { Ad } from './ad';
 import { Investment } from './investment';
 import { OpayTransaction } from './payment';
 import { PremiumVideoAccess, Video, VideoDownload, View } from './video';
 import { Profile } from './user';
 import { Referral } from './referral';
-import { SocialMediaChannel } from './social';
+import { SocialMediaChannel, Vote } from './social';
 import { Task, UserTask } from './task';
 import { Transaction, Wallet } from './wallet';
-import { UserAchievement } from './achievement';
-import { Vote } from './social';
 
 export type Json =
   | string
@@ -24,7 +22,6 @@ export interface Database {
     Tables: {
       achievements: Achievement;
       ads: Ad;
-      comments: Comment;
       investments: Investment;
       opay_transactions: OpayTransaction;
       premium_video_access: PremiumVideoAccess;
