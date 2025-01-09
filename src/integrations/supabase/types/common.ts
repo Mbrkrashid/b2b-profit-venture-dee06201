@@ -2,7 +2,7 @@ import { Achievement, UserAchievement } from './achievement';
 import { Ad } from './ad';
 import { Investment } from './investment';
 import { OpayTransaction } from './payment';
-import { PremiumVideoAccess, Video, VideoDownload, View } from './video';
+import { PremiumVideoAccess, Video, VideoDownload, VideoView } from './video';
 import { Profile } from './user';
 import { Referral } from './referral';
 import { SocialMediaChannel, Vote } from './social';
@@ -34,7 +34,7 @@ export interface Database {
       user_tasks: UserTask;
       video_downloads: VideoDownload;
       videos: Video;
-      views: View;
+      views: VideoView;
       votes: Vote;
       wallets: Wallet;
     };
