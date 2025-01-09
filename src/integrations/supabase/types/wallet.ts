@@ -1,9 +1,9 @@
-import { Database } from './common';
+import { DatabaseEnums } from './common';
 
 export interface Transaction {
   id: string;
   wallet_id?: string;
-  type: Database["public"]["Enums"]["transaction_type"];
+  type: DatabaseEnums["transaction_type"];
   amount: number;
   ecoin_amount?: number;
   status?: string;

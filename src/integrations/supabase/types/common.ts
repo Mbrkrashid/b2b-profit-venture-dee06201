@@ -1,3 +1,16 @@
+import { Achievement } from './achievement';
+import { Ad } from './ad';
+import { Investment } from './investment';
+import { OpayTransaction } from './payment';
+import { PremiumVideoAccess, Video, VideoDownload, View } from './video';
+import { Profile } from './user';
+import { Referral } from './referral';
+import { SocialMediaChannel } from './social';
+import { Task, UserTask } from './task';
+import { Transaction, Wallet } from './wallet';
+import { UserAchievement } from './achievement';
+import { Vote } from './social';
+
 export type Json =
   | string
   | number
