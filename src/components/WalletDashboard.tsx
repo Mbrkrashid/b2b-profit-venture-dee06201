@@ -66,7 +66,15 @@ export const WalletDashboard = () => {
         <TopUpButton />
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="relative">
+        <img 
+          src="/lovable-uploads/3e182b65-4f57-4e58-a221-39900a263596.png"
+          alt="Ecoin Logo"
+          className="absolute -top-16 right-0 w-32 h-32 animate-float opacity-50 pointer-events-none"
+        />
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
         <WalletBalance wallet={wallet} />
         <ReferralCard />
       </div>
