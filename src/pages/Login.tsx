@@ -1,16 +1,17 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN") {
-        navigate("/dashboard");
+      if (session) {
+        navigate("/");
       }
     });
 
@@ -18,29 +19,22 @@ const Login = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/90 to-secondary/90 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8 animate-fade-in">
-        <img src="/logo.png" alt="B2B Profit Investment" className="h-12 mx-auto mb-8 animate-bounce" />
-        <Auth
-          supabaseClient={supabase}
-          appearance={{
-            theme: ThemeSupa,
-            variables: {
-              default: {
-                colors: {
-                  brand: '#1E3A8A',
-                  brandAccent: '#166534',
-                },
-              },
-            },
-            className: {
-              container: 'animate-fade-in',
-              button: 'transform hover:scale-105 transition-all duration-300',
-              input: 'transform hover:scale-105 transition-all duration-300',
-            },
-          }}
-          providers={[]}
-        />
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Sign in to your account
+        </h2>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            providers={["google"]}
+            redirectTo={`${window.location.origin}/`}
+          />
+        </div>
       </div>
     </div>
   );
