@@ -19,8 +19,8 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/90 to-secondary/90 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8">
-        <img src="/logo.png" alt="B2B Profit Investment" className="h-12 mx-auto mb-8" />
+      <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8 animate-fade-in">
+        <img src="/logo.png" alt="B2B Profit Investment" className="h-12 mx-auto mb-8 animate-bounce" />
         <Auth
           supabaseClient={supabase}
           appearance={{
@@ -32,6 +32,11 @@ const Login = () => {
                   brandAccent: '#166534',
                 },
               },
+            },
+            className: {
+              container: 'animate-fade-in',
+              button: 'transform hover:scale-105 transition-all duration-300',
+              input: 'transform hover:scale-105 transition-all duration-300',
             },
           }}
           providers={[]}

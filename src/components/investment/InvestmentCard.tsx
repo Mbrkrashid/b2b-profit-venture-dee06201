@@ -17,28 +17,28 @@ interface InvestmentCardProps {
 
 export const InvestmentCard = ({ option, onSuccess }: InvestmentCardProps) => {
   return (
-    <Card className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow">
+    <Card className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow animate-fade-in">
       <CardHeader>
         <CardTitle className="text-xl font-semibold">{option.title}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div>
+          <div className="transform hover:scale-105 transition-transform">
             <p className="text-sm text-gray-500">Expected Return</p>
             <p className="text-2xl font-bold text-secondary">{option.return}</p>
           </div>
-          <div>
+          <div className="transform hover:scale-105 transition-transform">
             <p className="text-sm text-gray-500">Minimum Investment</p>
             <p className="text-lg font-medium">₦{option.minimum.toLocaleString()}</p>
           </div>
-          <div>
+          <div className="transform hover:scale-105 transition-transform">
             <p className="text-sm text-gray-500">Lock-in Period</p>
             <p className="text-lg">{option.duration}</p>
           </div>
           <PaymentButton 
             amount={option.minimum}
             onSuccess={() => onSuccess(option)}
-            className="w-full bg-primary/90 hover:bg-primary flex items-center justify-center"
+            className="w-full bg-primary/90 hover:bg-primary flex items-center justify-center transform hover:scale-105 transition-transform"
           />
           <div className="flex items-center justify-center text-sm text-gray-500">
             <ArrowUpRight className="mr-1 h-4 w-4" />
