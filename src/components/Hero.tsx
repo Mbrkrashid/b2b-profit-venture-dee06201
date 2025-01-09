@@ -7,6 +7,7 @@ export const Hero = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-primary/90 to-secondary/90 py-32">
+      <div className="absolute inset-0 bg-[url('/crypto-pattern.svg')] opacity-10" />
       <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
       <div className="mx-auto max-w-7xl px-4 text-center">
         <img src="/logo.png" alt="B2B Profit Investment" className="mx-auto h-20 mb-8" />
