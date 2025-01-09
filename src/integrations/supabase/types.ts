@@ -796,8 +796,3 @@ export type CompositeTypes<
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
-
-// Add these type definitions at the end of the file
-export type Transaction = Tables<'transactions'>;
-export type Wallet = Tables<'wallets'>;
-export type Referral = Tables<'referrals'>;
