@@ -6,6 +6,7 @@ import { InvestmentOptions } from "@/components/InvestmentOptions";
 import { ReferralCard } from "@/components/referral/ReferralCard";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import { CryptoBackground } from "@/components/backgrounds/CryptoBackground";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -26,8 +27,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
+    <div className="min-h-screen bg-gray-50/50 relative">
+      <CryptoBackground />
+      <nav className="bg-white/80 backdrop-blur-sm shadow-sm relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <img src="/logo.png" alt="B2B Profit Investment" className="h-8" />
@@ -43,7 +45,7 @@ const Dashboard = () => {
         </div>
       </nav>
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <div className="grid gap-8">
           <WalletDashboard />
           <ReferralCard />
