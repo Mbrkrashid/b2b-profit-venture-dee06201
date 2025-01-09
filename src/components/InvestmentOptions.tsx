@@ -25,38 +25,36 @@ export const InvestmentOptions = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">Investment Options</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {options.map((option, index) => (
-            <Card key={index} className="relative overflow-hidden hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-xl">{option.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-gray-500">Expected Return</p>
-                    <p className="text-2xl font-bold text-secondary">{option.return}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Minimum Investment</p>
-                    <p className="text-lg font-semibold">{option.minimum}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Lock-in Period</p>
-                    <p className="text-lg">{option.duration}</p>
-                  </div>
-                  <Button className="w-full mt-4">
-                    Invest Now
-                    <ArrowUpRight className="ml-2 h-4 w-4" />
-                  </Button>
+    <section className="py-16">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-8">Investment Options</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {options.map((option, index) => (
+          <Card key={index} className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-xl font-semibold">{option.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-500">Expected Return</p>
+                  <p className="text-2xl font-bold text-secondary">{option.return}</p>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                <div>
+                  <p className="text-sm text-gray-500">Minimum Investment</p>
+                  <p className="text-lg font-medium">{option.minimum}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Lock-in Period</p>
+                  <p className="text-lg">{option.duration}</p>
+                </div>
+                <Button className="w-full bg-primary/90 hover:bg-primary">
+                  Invest Now
+                  <ArrowUpRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </section>
   );
