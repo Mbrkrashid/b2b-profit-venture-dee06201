@@ -11,7 +11,8 @@ export const WalletDashboard = () => {
       const { data, error } = await supabase
         .from("wallets")
         .select("*")
-        .single();
+        .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
+        .maybeSingle();
       
       if (error) throw error;
       return data;
@@ -21,19 +22,27 @@ export const WalletDashboard = () => {
   const { data: transactions, isLoading: isLoadingTransactions } = useQuery({
     queryKey: ["transactions"],
     queryFn: async () => {
+      if (!wallet?.id) return [];
+      
       const { data, error } = await supabase
         .from("transactions")
         .select("*")
+        .eq('wallet_id', wallet.id)
         .order("created_at", { ascending: false })
         .limit(5);
       
       if (error) throw error;
       return data;
     },
+    enabled: !!wallet?.id,
   });
 
-  if (isLoadingWallet || isLoadingTransactions) {
-    return <div>Loading...</div>;
+  if (isLoadingWallet) {
+    return <div>Loading wallet...</div>;
+  }
+
+  if (!wallet) {
+    return <div>No wallet found. Please contact support.</div>;
   }
 
   return (
@@ -64,39 +73,47 @@ export const WalletDashboard = () => {
           <CardTitle>Recent Transactions</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {transactions?.map((transaction) => (
-              <div
-                key={transaction.id}
-                className="flex items-center justify-between p-4 border rounded-lg"
-              >
-                <div className="flex items-center space-x-4">
-                  {transaction.type === "deposit" ? (
-                    <ArrowDownLeft className="h-8 w-8 text-green-500" />
-                  ) : (
-                    <ArrowUpRight className="h-8 w-8 text-red-500" />
-                  )}
-                  <div>
-                    <p className="font-medium capitalize">{transaction.type}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {new Date(transaction.created_at).toLocaleDateString()}
+          {isLoadingTransactions ? (
+            <div>Loading transactions...</div>
+          ) : transactions && transactions.length > 0 ? (
+            <div className="space-y-4">
+              {transactions.map((transaction) => (
+                <div
+                  key={transaction.id}
+                  className="flex items-center justify-between p-4 border rounded-lg"
+                >
+                  <div className="flex items-center space-x-4">
+                    {transaction.type === "deposit" ? (
+                      <ArrowDownLeft className="h-8 w-8 text-green-500" />
+                    ) : (
+                      <ArrowUpRight className="h-8 w-8 text-red-500" />
+                    )}
+                    <div>
+                      <p className="font-medium capitalize">{transaction.type}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(transaction.created_at).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium">
+                      {transaction.type === "deposit" ? "+" : "-"}
+                      {formatCurrency(transaction.amount)}
                     </p>
+                    {transaction.ecoin_amount > 0 && (
+                      <p className="text-sm text-muted-foreground">
+                        {transaction.ecoin_amount} coins
+                      </p>
+                    )}
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-medium">
-                    {transaction.type === "deposit" ? "+" : "-"}
-                    {formatCurrency(transaction.amount)}
-                  </p>
-                  {transaction.ecoin_amount > 0 && (
-                    <p className="text-sm text-muted-foreground">
-                      {transaction.ecoin_amount} coins
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-muted-foreground py-8">
+              No transactions yet
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
