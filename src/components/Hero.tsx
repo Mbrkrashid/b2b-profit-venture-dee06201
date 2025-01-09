@@ -1,6 +1,7 @@
 import { ArrowRight, TrendingUp, Shield, Coins, ChartBar, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { SocialShare } from "./SocialShare";
 
 export const Hero = () => {
   const navigate = useNavigate();
@@ -83,6 +84,8 @@ export const Hero = () => {
             Building wealth in Northern Nigeria
           </p>
         </div>
+
+        <SocialShare />
 
         {/* Floating investment amounts */}
         <div className="absolute bottom-10 left-10 animate-bounce delay-100">
